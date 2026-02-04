@@ -1,57 +1,10 @@
-// import axios from "axios";
-
-// const instance = axios.create({
-//     baseUrl: "http://localhost:8000/api/v1",
-//     timeout: 1000,
-//     headers: {
-//         "Content-Type": "application/json",
-//     },
-// });
-
-// instance.intereptors.request.use(
-//     (config) => {
-//         const token = localStorage.getItem("token");
-
-//         if(token) {
-//             config.headers.Authorization = `Bearer ${token}`;
-//         }
-
-//         return config;
-//     },
-//     (error) => {
-//         return Promise.reject(error);
-//     }
-// );
-
-// export default instance;
-
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "http://localhost:8080",
-  timeout: 10000,
+const api = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/v1/auth",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-instance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-instance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-export default instance;
+export default api;

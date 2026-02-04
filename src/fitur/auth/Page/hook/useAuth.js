@@ -1,30 +1,33 @@
-import { useEffect, useState } from "react";
-import { getAuths } from "../services/authService";
+import { useState } from "react";
+import { loginUser } from "../services/authService";
 
 export default function useAuth() {
-    const [ login, setLogin ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const fetchAuths = async (page = 0, size = 10)=> {
-        try {
-            setLoading(true);
-            const res = await getAuths(page, size);
+  const login = async (username, password) => {
+    try {
+      setLoading(true);
 
-            setLogin(res.data.logins ?? res.data);
-            console.log("API RESPONSE", res.data);
-        }catch (err) {
-            console.error("Failed fetch logins:", err);
-        }finally {
-            setLoading(false);
-        }
-        };
+      const res = await loginUser({
+        username,
+        password,
+      });
 
-        useEffect(() => {
-            fetchAuths();
-        }, []);
+      localStorage.setItem("token", res.data.token);
 
-        return {
-            login,
-            loading
-        }
+      return res.data;
+    } catch (err) {
+      setError(err.response?.data?.message || "Login gagal");
+      throw err;
+    } finally {
+      setLoading(false);
     }
+  };
+
+  return {
+    login,
+    loading,
+    error,
+  };
+}
