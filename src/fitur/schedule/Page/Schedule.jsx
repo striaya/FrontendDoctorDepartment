@@ -1,59 +1,59 @@
 export default function Navbar(){
     return(
-        <div class="container my-4">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="card card-info">
-                        <div class="card-header">
+        <div className="container my-4">
+            <div className="row">
+                <div className="col-md-6 col-sm-12 col-xs-12">
+                    <div className="card card-info">
+                        <div className="card-header">
                             Input Doctor's Schedules
                         </div>
-                        <div class="card-body">
-                            <div class="form-body">
+                        <div className="card-body">
+                            <div className="form-body">
                                 <form>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Doctor ID
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Department ID
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Date
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Start
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             End
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <div class="col-md-12">
-                                            <input type="submit" value="Save" class="btn btn-primary"/>
-                                            <input type="reset" value="Reset" class="btn btn-danger"/>
+                                    <div className="form-group row mb-4">
+                                        <div className="col-md-12">
+                                            <input type="submit" value="Save" className="btn btn-primary"/>
+                                            <input type="reset" value="Reset" className="btn btn-danger"/>
                                         </div>
                                     </div>
                                 </form>
@@ -62,13 +62,13 @@ export default function Navbar(){
                     </div>
                 </div>
             </div>
-            <div class="my-4">
-                <div class="card card-default">
-                    <div class="card-header">
+            <div className="my-4">
+                <div className="card card-default">
+                    <div className="card-header">
                         Data
                     </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
+                    <div className="card-body">
+                        <table className="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>

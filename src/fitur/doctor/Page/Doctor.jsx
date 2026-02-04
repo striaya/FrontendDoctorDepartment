@@ -1,84 +1,90 @@
 export default function Navbar(){
     return(
-        <div class="container my-4">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="card card-info">
-                        <div class="card-header">
+        <div className="container my-4">
+            <div className="row">
+                <div className="col-md-6 col-sm-12 col-xs-12">
+                    <div className="card card-info">
+                        <div className="card-header">
                             Input Doctor
                         </div>
-                        <div class="card-body">
-                            <div class="form-body">
+                        <div className="card-body">
+                            <div className="form-body">
                                 <form >
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Doctor ID
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12"></div>
-                                        <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12"></div>
+                                        <input className="form-control"/>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Name
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12"></div>
-                                        <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12"></div>
+                                        <input className="form-control"/>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Gender
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <select class="form-control">
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <select className="form-control">
                                                 <option>--Option--</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
                                         </div>
                                         </div>
-                                        <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                        <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Phone
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12"></div>
-                                        <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12"></div>
+                                        <input className="form-control"/>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Address
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12"></div>
-                                        <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12"></div>
+                                        <input className="form-control"/>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Email
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                        <input class="form-control"/>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                        <input className="form-control"/>
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-md-4 col-sm-12 col-xs-12">
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
                                             Bio
                                         </label>
-                                        <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <textarea class="form-control "></textarea>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <textarea className="form-control "></textarea>
                                         </div>
                                     </div>
+                                    <div className="form-group row mb-4">
+                                    <div className="col-md-12">
+                                      <input type="submit" value="Save" className="btn btn-primary" /> 
+                                      <input type="reset" value="Reset" className="btn btn-danger" />
+                                     </div>
+                                  </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="my-4">
-                <div class="card card-default">
-                    <div class="card-header">
+            <div className="my-4">
+                <div className="card card-default">
+                    <div className="card-header">
                         Data
                     </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
+                    <div className="card-body">
+                        <table className="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
