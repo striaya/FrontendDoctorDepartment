@@ -1,4 +1,53 @@
-export default function Navbar(){
+import { useState } from "react";
+import useDoctor from "./hook/useDoctors";
+
+export default function DoctorPage(){
+    const { doctors, loading, addDoctor } = useDoctor();
+    const [form, setForm] = useState({
+        doctorID: "",
+        name: "",
+        gender: "",
+        phone: "",
+        address: "",
+        email: "",
+        bio: "",
+    });
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        await addDoctor(form);
+
+        setForm({
+            doctorID: "",
+            name: "",
+            gender: "",
+            phone: "",
+            address: "",
+            email: "",
+            bio: "",
+        });
+    }
+
+    const handleReset = () => {
+        setForm({
+            doctorID: "",
+            name: "",
+            gender: "",
+            phone: "",
+            address: "",
+            email: "",
+            bio: "",
+        });
+    }
+
     return(
         <div className="container my-4">
             <div className="row">
@@ -9,7 +58,7 @@ export default function Navbar(){
                         </div>
                         <div className="card-body">
                             <div className="form-body">
-                                <form >
+                                <form onSubmit={handleSubmit}>
                                     <div className="form-group row mb-4">
                                         <label className="col-md-4 col-sm-12 col-xs-12">
                                             Doctor ID

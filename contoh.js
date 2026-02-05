@@ -1,156 +1,144 @@
-// import useLogin from "./hook/Logins";
+import { useState } from "react";
+import useDepartment from "./hook/useDepartment";
 
-// export default function NavbarAuth() {
+export default function Department() {
 
-//   // 🔥 PANGGIL HOOK DI SINI
-//   const { login, loading } = useLogin();
+  const { departments, loading, addDepartment } = useDepartment();
 
-//   // optional: tampil loading
-//   if (loading) {
-//     return <p>Loading...</p>;
-//   }
+  const [form, setForm] = useState({
+    departementId: "",
+    name: "",
+    description: "",
+  });
 
-//   return (
-//     <div className="container my-4">
-//       <div className="row justify-content-center">
-//         <div className="col-6">
-//           <div className="card">
+  // handle input
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-//             <div
-//               className="card-header text-center"
-//               style={{ backgroundColor: "#e3f2fd" }}
-//             >
-//               <h1>
-//                 <i className="fa-solid fa-notes-medical fa-lg"></i> e-Doc
-//               </h1>
-//             </div>
+  // submit form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-//             <div className="card-body">
+    await addDepartment(form);
 
-//               <h5 className="card-title mb-4">Login Form</h5>
+    // reset form
+    setForm({
+      departementId: "",
+      name: "",
+      description: "",
+    });
+  };
 
-//               {/* 🔽 CONTOH PAKAI DATA DARI API */}
-//               {login.map((item, index) => (
-//                 <p key={index}>{item.username}</p>
-//               ))}
+  return (
+    <div className="container my-4">
 
-//               <div className="form-group mb-4">
-//                 <label htmlFor="inputEmail" className="sr-only">
-//                   Email address
-//                 </label>
+      {/* FORM */}
+      <div className="card mb-4">
+        <div className="card-header">
+          Input Department
+        </div>
 
-//                 <input
-//                   type="email"
-//                   id="inputEmail"
-//                   className="form-control"
-//                   placeholder="Email address"
-//                   autoFocus
-//                 />
-//               </div>
+        <div className="card-body">
 
-//               <div className="form-group mb-4">
-//                 <label htmlFor="inputPassword" className="sr-only">
-//                   Password
-//                 </label>
+          <form onSubmit={handleSubmit}>
 
-//                 <input
-//                   type="password"
-//                   id="inputPassword"
-//                   className="form-control"
-//                   placeholder="Password"
-//                 />
-//               </div>
+            <div className="mb-3">
+              <label>Department ID</label>
+              <input
+                name="departementId"
+                className="form-control"
+                value={form.departementId}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-//               <div className="checkbox mb-4">
-//                 <label>
-//                   <input type="checkbox" /> Remember me
-//                 </label>
-//               </div>
+            <div className="mb-3">
+              <label>Department Name</label>
+              <input
+                name="name"
+                className="form-control"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-//               <div className="d-grid gap-2">
-//                 <button className="btn btn-primary" type="submit">
-//                   Sign in
-//                 </button>
-//               </div>
+            <div className="mb-3">
+              <label>Description</label>
+              <textarea
+                name="description"
+                className="form-control"
+                value={form.description}
+                onChange={handleChange}
+              />
+            </div>
 
-//             </div>
+            <button type="submit" className="btn btn-primary me-2">
+              Save
+            </button>
 
-//             <div className="card-footer text-center">
-//               Copyright © 2025
-//             </div>
+            <button
+              type="reset"
+              className="btn btn-danger"
+              onClick={() =>
+                setForm({
+                  departementId: "",
+                  name: "",
+                  description: "",
+                })
+              }
+            >
+              Reset
+            </button>
 
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// import axios from "axios";
-
-// const API_URL = "http://localhost:8000/api"; 
-// // ganti kalau backend kamu beda
-
-// // GET semua auth / user (contoh)
-// export const getAuths = (page = 0, size = 10) => {
-//   return axios.get(`${API_URL}/auth?page=${page}&size=${size}`);
-// };
-
-// // LOGIN
-// export const loginUser = (data) => {
-//   return axios.post(`${API_URL}/auth/login`, data);
-// };
-
-// import axios from "axios";
-
-// const instance = axios.create({
-//   baseURL: "http://localhost:8000/api", // backend kamu
-//   timeout: 10000,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
-
-// // Interceptor (optional, tapi penting nanti)
-// instance.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem("token");
-
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
-
-// export default instance;
-
-// import api from "../../../api/axios";
-
-// // GET user
-// export const getAuths = () => {
-//   return api.get("/auth");
-// };
-
-// // LOGIN
-// export const loginUser = (data) => {
-//   return api.post("/auth/login", data);
-// };
+          </form>
+        </div>
+      </div>
 
 
+      {/* TABLE */}
+      <div className="card">
 
-// import api from "../../../api/axios";
+        <div className="card-header">
+          Data
+        </div>
 
-// export const getDoctors = (page = 0, size = 10) => {
-//   return api.get("/doctor", {
-//     params: { page, size },
-//   });
-// };
+        <div className="card-body">
 
-// export const createDoctor = (data) => {
-//   return api.post("/doctor", data);
-// };
+          {loading && <p>Loading...</p>}
+
+          <table className="table table-bordered">
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {departments.map((item) => (
+                <tr key={item.department_id}>
+                  <td>{item.department_id}</td>
+                  <td>{item.department_name}</td>
+                  <td>{item.department_description}</td>
+                </tr>
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  );
+}
