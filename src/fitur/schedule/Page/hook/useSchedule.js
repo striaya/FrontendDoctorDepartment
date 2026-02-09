@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { getSchedules } from "../services/scheduleService";
+import { getSchedules, createSchedule } from "../services/scheduleService";
 
-export default function Schedules() {
+export default function useSchedule() {
     const [schedule, Schedule] = useState([]);
     const [loading, Loading] = useState(false);
 
@@ -19,12 +19,24 @@ export default function Schedules() {
         }
     };
 
+    const addSchedule = async (data) => {
+        try{
+            await createSchedule(data);
+
+            fetchSchedules();
+        }catch (err) {
+            console.error("Failed to add Schedule:", err);
+        }
+    };
+
     useEffect(() => {
         fetchSchedules();
     }, []);
 
      return {
         schedule,
-        loading
+        loading,
+        fetchSchedules,
+        addSchedule
      }
 }
