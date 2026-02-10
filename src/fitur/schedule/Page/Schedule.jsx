@@ -91,7 +91,7 @@ const {
                                             required>
                                             <option value="">Pilih Doctor</option>
                                             {doctors.map((doc) => (
-                                                <option key={doc.doctor_id} value={doc.doctor_id}>
+                                                <option key={doc.doctorID} value={doc.doctorID}>
                                                     {doc.doctorName}
                                                 </option>
                                             ))}

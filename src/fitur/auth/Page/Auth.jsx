@@ -17,7 +17,7 @@ export default function NavbarAuth() {
       const res = await login(username, password);
       localStorage.setItem("token", res.token); 
       alert("Login sukses!");
-      navigate("/")
+      navigate("/Home")
       console.log(res);
     } catch {
       // error sudah di hook

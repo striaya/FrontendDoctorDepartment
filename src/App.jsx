@@ -20,8 +20,8 @@ export default function App() {
     {isAuthPage ? <NavbarAuth /> : <Navbar />}
 
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/Auth' element={<Login />} />
+        <Route path='/' element={<Login />} />
+        <Route path='/Home' element={<Home />} />
         <Route path='/Doctor' element={<Doctor />} />
         <Route path='/Department' element={<Department />} />
         <Route path='/Schedule' element={<Schedule />} />
