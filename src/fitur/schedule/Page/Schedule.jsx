@@ -65,22 +65,37 @@ const {
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group row mb-4">
                                         <label className="col-md-4 col-sm-12 col-xs-12">
-                                            Doctor ID
+                                            Schedule ID
                                         </label>
                                         <div className="col-md-8 col-sm-12 col-xs-12">
                                             <input 
                                             type="text"
                                             className="form-control"
+                                            name="scheduleID"
+                                            value={form.scheduleID}
+                                            onChange={handleChange}
+                                            required/>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row mb-4">
+                                        <label className="col-md-4 col-sm-12 col-xs-12">
+                                            Doctor ID
+                                        </label>
+                                        <div className="col-md-8 col-sm-12 col-xs-12">
+                                            <select
+                                            type="text"
+                                            className="form-control"
                                             name="doctorID"
                                             value={form.doctorID}
                                             onChange={handleChange}
-                                            required/>
+                                            required>
                                             <option value="">Pilih Doctor</option>
                                             {doctors.map((doc) => (
-                                                <option key={doc.doctorID} value={doc.doctorID}>
+                                                <option key={doc.doctor_id} value={doc.doctor_id}>
                                                     {doc.doctorName}
                                                 </option>
                                             ))}
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="form-group row mb-4">
@@ -88,19 +103,20 @@ const {
                                             Department ID
                                         </label>
                                         <div className="col-md-8 col-sm-12 col-xs-12">
-                                            <input 
+                                            <select 
                                             type="text"
                                             className="form-control"
                                             name="departmentID"
                                             value={form.departmentID}
                                             onChange={handleChange}
-                                            required/>
+                                            required>
                                             <option value="">Pilih Department</option>
                                             {departments.map((doc) => (
                                                 <option key={doc.departmentID} value={doc.departmentID}>
                                                     {doc.departmentName}
                                                 </option>
                                             ))}
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="form-group row mb-4">
@@ -171,6 +187,7 @@ const {
             <table className="table table-bordered">
               <thead>
                 <tr>
+                  <th>ScheduleID</th>
                   <th>DoctorID</th>
                   <th>DepartmentID</th>
                   <th>Tanggal</th>
@@ -184,12 +201,13 @@ const {
                     <td colSpan="7" className="text-center">
                       No doctors available
                     </td>
-                  </tr>
+                  </tr> 
                 ) : (
                   schedules.map((item, index) => (
                     <tr key={index}>
-                      <td>{item.doctors?.doctorID}</td>
-                      <td>{item.departments?.departmentID}</td>
+                      <td>{item.scheduleID}</td>
+                      <td>{item.doctorID}</td>
+                      <td>{item.departmentID}</td>
                       <td>{item.scheduleDate}</td>
                       <td>{item.startTime}</td>
                       <td>{item.endTime}</td>
