@@ -5,7 +5,7 @@ export default function DoctorPage(){
     const { doctors, loading, addDoctor } = useDoctor();
     const [form, setForm] = useState({
         doctorID: "",
-        name: "",
+        doctorName: "",
         gender: "",
         phone: "",
         address: "",
@@ -22,12 +22,12 @@ export default function DoctorPage(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log("Form Data:", form);
         await addDoctor(form);
 
         setForm({
             doctorID: "",
-            name: "",
+            doctorName: "",
             gender: "",
             phone: "",
             address: "",
@@ -39,7 +39,7 @@ export default function DoctorPage(){
     const handleReset = () => {
         setForm({
             doctorID: "",
-            name: "",
+            doctorName: "",
             gender: "",
             phone: "",
             address: "",
@@ -47,6 +47,10 @@ export default function DoctorPage(){
             bio: "",
         });
     }
+
+    // useEffect(() => {
+    //     fetchDoctors();
+    // }, [fetchDoctors])
 
     return(
         <div className="container my-4">
@@ -76,10 +80,10 @@ export default function DoctorPage(){
                                         </label>
                                         <div className="col-md-8 col-sm-12 col-xs-12"></div>
                                         <input 
-                                        input="text"
+                                        type="text"
                                         className="form-control"
-                                        name="name"
-                                        value={form.name}
+                                        name="doctorName"
+                                        value={form.doctorName}
                                         onChange={handleChange}/>
                                     </div>
                                     <div className="form-group row mb-4">
@@ -93,9 +97,9 @@ export default function DoctorPage(){
                                             value={form.gender}
                                             onChange={handleChange}
                                             >
-                                                <option>--Option--</option>
-                                                <option>Male</option>
-                                                <option>Female</option>
+                                                <option value="">--Option--</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
                                             </select>
                                         </div>
                                         </div>
@@ -199,7 +203,7 @@ export default function DoctorPage(){
                   doctors.map((doc, index) => (
                     <tr key={index}>
                       <td>{doc.doctorID}</td>
-                      <td>{doc.name}</td>
+                      <td>{doc.doctorName     }</td>
                       <td>{doc.gender}</td>
                       <td>{doc.phone}</td>
                       <td>{doc.address}</td>

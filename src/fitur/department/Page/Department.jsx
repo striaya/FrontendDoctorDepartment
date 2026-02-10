@@ -3,11 +3,11 @@ import useDepartment from "./hook/useDepartment";
 
 export default function Department() {
 
-  const { department, loading, addDepartment } = useDepartment();
+  const { departments, loading, addDepartment } = useDepartment();
   const [form, setForm] = useState({
-    department_id: "",
-    department_name: "",
-    department_description: "",
+    departmentID: "",
+    departmentName: "",
+    departmentDesc: "",
   });
 
   const handleChange = (e) => {
@@ -19,21 +19,21 @@ export default function Department() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("Form Data:", form);
     await addDepartment(form);
 
     setForm({
-      department_id: "",
-      department_name: "",
-      department_description: "",
+    departmentID: "",
+    departmentName: "",
+    departmentDesc: "",
     });
   };
 
   const handleReset = () => {
     setForm({
-      department_id: "",
-      department_name: "",
-      department_description: "",
+    departmentID: "",
+    departmentName: "",
+    departmentDesc: "",
     })
   }
 
@@ -52,42 +52,39 @@ export default function Department() {
                       <label className="col-md-4 col-sm-12 col-xs-12">
                         Department ID
                       </label>
-                      <div className="col-md-8 col-sm-12 col-xs-12">
+                      <div className="col-md-8 col-sm-12 col-xs-12"></div>
                         <input 
                           type="text" 
                           className="form-control" 
-                          name="department_id"
-                          value={form.department_id}
+                          name="departmentID"
+                          value={form.departmentID}
                           onChange={handleChange}
                         />
-                      </div>
                     </div>
                     <div className="form-group row mb-4">
                       <label className="col-md-4 col-sm-12 col-xs-12">
                         Department Name
                       </label>
-                      <div className="col-md-8 col-sm-12 col-xs-12">
+                      <div className="col-md-8 col-sm-12 col-xs-12"></div>
                         <input 
                           type="text" 
                           className="form-control" 
-                          name="department_name"
-                          value={form.department_name}
+                          name="departmentName"
+                          value={form.departmentName}
                           onChange={handleChange}
                         />
-                      </div>
                     </div>
                     <div className="form-group row mb-4">
                       <label className="col-md-4 col-sm-12 col-xs-12">
                         Description
                       </label>
-                      <div className="col-md-8 col-sm-12 col-xs-12">
+                      <div className="col-md-8 col-sm-12 col-xs-12"></div>
                         <textarea 
                           className="form-control" 
-                          name="department_description"
-                          value={form.department_description}
+                          name="departmentDesc"
+                          value={form.departmentDesc}
                           onChange={handleChange}
                         ></textarea>
-                      </div>
                     </div>
                     <div className="form-group row mb-4">
                       <div className="col-md-12">
@@ -124,11 +121,11 @@ export default function Department() {
                   </tr>
                 </thead>
                 <tbody>
-                  {department.map((item, index) => (
-                    <tr key={item.department_id ?? index}>
-                      <td>{item.department_id}</td>
-                      <td>{item.department_name}</td>
-                      <td>{item.department_description}</td>
+                  {departments.map((item, index) => (
+                    <tr key={item.departmentID ?? index}>
+                      <td>{item.departmentID}</td>
+                      <td>{item.departmentName}</td>
+                      <td>{item.departmentDesc}</td>
                     </tr>
                   ))}
                 </tbody>

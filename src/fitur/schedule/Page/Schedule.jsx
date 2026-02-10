@@ -1,5 +1,7 @@
 import { useState } from "react";
 import useSchedule from "./hook/useSchedule";
+import useDoctor from "../../doctor/Page/hook/useDoctor";
+import useDepartment from "../../department/Page/hook/useDepartment";
 
 export default function SchedulePage() {
 const {
@@ -7,13 +9,16 @@ const {
   loading = false,
   addSchedule
 } = useSchedule([]);
+    const {doctors} = useDoctor();
+    const {departments} = useDepartment();
+
     const [ form, setForm ] =  useState({   
-        schedule_id: "",
-        doctor_id: "",
-        department_id: "",
-        schedule_date: "",
-        schedule_start: "",
-        schedule_end: "",
+        scheduleID: "",
+        doctorID: "",
+        departmentID: "",
+        scheduleDate: "",
+        startTime: "",
+        endTime: "",
     });
 
     const handleChange = (e) => {
@@ -26,25 +31,24 @@ const {
     const handleSubmit = async (e)=> {
         e.preventDefault();
 
-        await addSchedule(form);
-        setForm({
-            schedule_id: "",
-            doctor_id: "",
-            department_id: "",
-            schedule_date: "",
-            schedule_start: "",
-            schedule_end: "",
-        });
-    }
+  const payload = {
+    doctorID: form.doctorID,
+    departmentID: form.departmentID,
+    date: form.scheduleDate,
+    startTime: form.startTime,
+    endTime: form.endTime
+  };
 
+  await addSchedule(payload);
+};
     const handleReset = () => {
         setForm({
-            schedule_id: "",
-            doctor_id: "",
-            department_id: "",
-            schedule_date: "",
-            schedule_start: "",
-            schedule_end: "",
+        scheduleID: "",
+        doctorID: "",
+        departmentID: "",
+        scheduleDate: "",
+        startTime: "",
+        endTime: "",
         });
     }
 
@@ -67,9 +71,16 @@ const {
                                             <input 
                                             type="text"
                                             className="form-control"
-                                            name="doctor_id"
-                                            value={form.doctor_id}
-                                            onChange={handleChange}/>
+                                            name="doctorID"
+                                            value={form.doctorID}
+                                            onChange={handleChange}
+                                            required/>
+                                            <option value="">Pilih Doctor</option>
+                                            {doctors.map((doc) => (
+                                                <option key={doc.doctorID} value={doc.doctorID}>
+                                                    {doc.doctorName}
+                                                </option>
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="form-group row mb-4">
@@ -80,9 +91,16 @@ const {
                                             <input 
                                             type="text"
                                             className="form-control"
-                                            name="department_id"
-                                            value={form.department_id}
-                                            onChange={handleChange}/>
+                                            name="departmentID"
+                                            value={form.departmentID}
+                                            onChange={handleChange}
+                                            required/>
+                                            <option value="">Pilih Department</option>
+                                            {departments.map((doc) => (
+                                                <option key={doc.departmentID} value={doc.departmentID}>
+                                                    {doc.departmentName}
+                                                </option>
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="form-group row mb-4">
@@ -93,8 +111,8 @@ const {
                                             <input 
                                             type="date"
                                             className="form-control"
-                                            name="schedule_date"
-                                            value={form.schedule_date}
+                                            name="scheduleDate"
+                                            value={form.scheduleDate}
                                             onChange={handleChange}
                                             />
                                         </div>
@@ -107,8 +125,8 @@ const {
                                             <input 
                                             type="time"
                                             className="form-control"
-                                            name="schedule_start"
-                                            value={form.schedule_start}
+                                            name="startTime"
+                                            value={form.startTime}
                                             onChange={handleChange}/>
                                         </div>
                                     </div>
@@ -119,8 +137,8 @@ const {
                                         <div className="col-md-8 col-sm-12 col-xs-12">
                                             <input type="time"
                                             className="form-control"
-                                            name="schedule_end"
-                                            value={form.schedule_end}
+                                            name="endTime"
+                                            value={form.endTime}
                                             onChange={handleChange}/>
                                         </div>
                                     </div>
@@ -168,13 +186,13 @@ const {
                     </td>
                   </tr>
                 ) : (
-                  schedules.map((doc, index) => (
+                  schedules.map((item, index) => (
                     <tr key={index}>
-                      <td>{doc.doctor_id}</td>
-                      <td>{doc.department_id}</td>
-                      <td>{doc.schedule_date}</td>
-                      <td>{doc.schedule_start}</td>
-                      <td>{doc.schedule_end}</td>
+                      <td>{item.doctors?.doctorID}</td>
+                      <td>{item.departments?.departmentID}</td>
+                      <td>{item.scheduleDate}</td>
+                      <td>{item.startTime}</td>
+                      <td>{item.endTime}</td>
                     </tr>
                   ))
                 )}

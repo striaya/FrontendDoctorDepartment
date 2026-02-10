@@ -9,32 +9,43 @@ export default function useDoctor() {
     try {
       setLoading(true);
       const res = await getDoctors(page, size);
+      setDoctor(res.data.doctors);
 
-      setDoctor(res.data.doctors ?? res.data);
-      console.log("API RESPONSE", res.data);
     } catch (err) {
-      console.error("Failed fetch doctors:", err);
-    } finally {
+  console.log("STATUS:", err.response?.status);
+  console.log("ERROR DATA:", err.response?.data);
+  console.log("ERROR MESSAGE:", err.response?.data?.message);
+  console.log("ERROR DETAILS:", err.response?.data?.errors);
+}
+ finally {
       setLoading(false);
     }
   };
 
-  const addDoctor = async (data) => {
-    try {
-      await createDoctor(data);
-
-      fetchDoctors();
-    }catch (err) {
-      console.error("Failed to add doctor:", err);
-    }
-  };
-
+const addDoctor = async (data) => {
+  try {
+    setLoading(true);
+    await createDoctor(data);
+    await fetchDoctors(); 
+  } catch (err) {
+  console.log("STATUS:", err.response?.status);
+  console.log("ERROR DATA:", err.response?.data);
+  console.log("ERROR MESSAGE:", err.response?.data?.message);
+  console.log("ERROR DETAILS:", err.response?.data?.errors);
+}
+ finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
-    fetchDoctors();
+    const token = localStorage.getItem("token");
+    if(token) {
+      fetchDoctors();
+    }
   }, []);
 
   return {
-    doctors,
+    doctors,  
     loading,
     fetchDoctors,
     addDoctor

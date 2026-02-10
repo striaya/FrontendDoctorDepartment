@@ -7,5 +7,17 @@ export const getDoctors = (page = 0, size = 10) => {
 };
 
 export const createDoctor = (data) => {
-    return api.post("/doctor", data);
+    const form = {
+        doctorID: data.doctorID,
+        name: data.doctorName,
+        gender: data.gender,
+        phone: data.phone,
+        address: data.address,
+        email: data.email,
+        bio: data.bio,
+    };
+
+      console.log("FORM SENT:", form);
+
+    return api.post("/doctor", form);
 };

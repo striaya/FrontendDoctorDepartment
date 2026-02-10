@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAuth from "./hook/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarAuth() {
   const { login, loading, error } = useAuth();
@@ -7,12 +8,16 @@ export default function NavbarAuth() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await login(username, password);
+      localStorage.setItem("token", res.token); 
       alert("Login sukses!");
+      navigate("/")
       console.log(res);
     } catch {
       // error sudah di hook

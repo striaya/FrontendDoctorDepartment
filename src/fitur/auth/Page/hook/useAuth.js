@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../services/authService";
+// import api from "../../../../api/auth";
 
 export default function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ export default function useAuth() {
         password,
       });
 
+      console.log("Login Response:", res.data)
       localStorage.setItem("token", res.data.token);
 
       return res.data;

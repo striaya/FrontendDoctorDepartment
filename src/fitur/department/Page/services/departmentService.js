@@ -7,5 +7,13 @@ export const getDepartments = ( page = 0, size = 10 ) => {
 };
 
 export const createDepartment = (data) => {
-    return api.post("/departement", data);
+       const form = {
+        departementId: data.departmentID,
+        name: data.departmentName,
+        description: data.departmentDesc,
+    };
+
+      console.log("FORM SENT:", form);
+
+    return api.post("/departement", form);
 };

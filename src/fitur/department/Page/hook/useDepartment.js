@@ -3,18 +3,20 @@ import { getDepartments } from "../services/departmentService";
 import { createDepartment } from "../services/departmentService";
 
 export default function useDepartment() {
-    const [ department, setDepartment ] = useState([]);
+    const [ departments, setDepartment ] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
     const fetchDepartments = async (page = 0, size = 10) => {
         try {
-            setLoading(true);
-            const res = await getDepartments(page, size);
+      setLoading(true);
+      const res = await getDepartments(page, size);
+      setDepartment(res.data.departments);
 
-            setDepartment(res.data.departments ?? res.data);
-            console.log("API RESPONSE", res.data); 
         } catch (err) {
-            console.error("Failed to fetch departments:", err);
+          console.log("STATUS:", err.response?.status);
+          console.log("ERROR DATA:", err.response?.data);
+          console.log("ERROR MESSAGE:", err.response?.data?.message);
+          console.log("ERROR DETAILS:", err.response?.data?.errors);
         } finally {
             setLoading(false);
         }
@@ -22,23 +24,32 @@ export default function useDepartment() {
 
 const addDepartment = async (data) => {
   try {
+    setLoading(true);
     await createDepartment(data);
+    await fetchDepartments();
 
-    fetchDepartments();
   } catch (err) {
-    console.error("Failed to add department:", err);
+      console.log("STATUS:", err.response?.status);
+      console.log("ERROR DATA:", err.response?.data);
+      console.log("ERROR MESSAGE:", err.response?.data?.message);
+      console.log("ERROR DETAILS:", err.response?.data?.errors);  }
+ finally {
+    setLoading(false);
   }
 };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token) {
+      fetchDepartments();
+    }
+  }, []);
 
-    useEffect(() => {
-        fetchDepartments();
-    }, []);
 
     return {
-        department,
+        departments,
         loading,
         fetchDepartments,
         addDepartment
-    }
-}
+    };
+};  
